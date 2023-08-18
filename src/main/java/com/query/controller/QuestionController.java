@@ -1,5 +1,8 @@
 package com.query.controller;
 
+import com.query.dto.QuestionCreateRequest;
+import com.query.dto.QuestionViewRequest;
+import com.query.dto.QuestionViewResponse;
 import com.query.entity.Member;
 import com.query.entity.Question;
 import com.query.service.QuestionService;
@@ -10,25 +13,39 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 public class QuestionController {
-    //@AuthenticationPrincipal Member member
     @Autowired
     QuestionService questionService;
 
-
-//    @PostMapping("/api/articles")
-//    public ResponseEntity<Article> addArticle(@RequestBody AddArticleRequest request
-//            , Principal principal) {
-//        Article savedArticle = blogService.save(request, principal.getName());
-//        return ResponseEntity.status(HttpStatus.CREATED).body(savedArticle);
-//        // 응답 코드로 201, created를 응답하고 테이블에 저장된 객체를 반환
-//    }
-
+    // 질문 작성
     @PostMapping("/{email}")
-    public ResponseEntity<Void> addQuestion(@PathVariable String ownerEmail, @AuthenticationPrincipal Member writer) {
+    public ResponseEntity<Void> addQuestion(@AuthenticationPrincipal Member writer, @RequestBody QuestionCreateRequest dto) {
+        questionService.createQuestion(writer, dto);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
+    }
 
+    // 페이지 주인이 올린 질문 조회
+    @GetMapping("/{email}/my")
+    public ResponseEntity<List<QuestionViewResponse>> getMyQuestion(@PathVariable String email) {
+        List<QuestionViewResponse> questions = questionService.getMyQuestion(email)
+                .stream()
+                .map(QuestionViewResponse::new)
+                .collect(Collectors.toList());
+        return ResponseEntity.ok().body(questions);
+    }
+
+    // 다른 사람들이 남긴 질문 조회
+    @GetMapping("/{email}/other")
+    public ResponseEntity<List<QuestionViewResponse>> getOtherQuestion(@PathVariable String email) {
+        List<QuestionViewResponse> questions = questionService.getOtherQuestion(email)
+                .stream()
+                .map(QuestionViewResponse::new)
+                .collect(Collectors.toList());
+        return ResponseEntity.ok().body(questions);
     }
 
 }

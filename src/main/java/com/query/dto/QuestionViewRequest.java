@@ -11,5 +11,5 @@ import lombok.NoArgsConstructor;
 @Builder
 public class QuestionViewRequest {
     private Long ownerId;
-    private Long writerId;
+    private String body;
 }

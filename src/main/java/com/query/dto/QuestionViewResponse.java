@@ -1,5 +1,7 @@
 package com.query.dto;
 
+import com.query.entity.Member;
+import com.query.entity.Question;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -13,8 +15,16 @@ import java.time.LocalDateTime;
 @Builder
 public class QuestionViewResponse {
     private Long id;
-    private Long body;
+    private String body;
     private Long ownerId;
-    private Long writeId;
+    private Long writerId;
     private LocalDateTime createdDate;
+
+    public QuestionViewResponse(Question question) {
+        this.id = question.getId();
+        this.body = question.getBody();
+        this.ownerId = question.getOwner().getMemberId();
+        this.writerId = question.getWriter().getMemberId();
+        this.createdDate = question.getCreatedDate();
+    }
 }
