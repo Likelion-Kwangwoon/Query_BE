@@ -21,7 +21,8 @@ public class MemberController {
     @Autowired
     private MemberRepository memberRepository;
     @GetMapping("")
-    public ResponseEntity allMember() {
+    public ResponseEntity allMember(@AuthenticationPrincipal Member member) {
+
         List<Member> memberList = memberRepository.findAll();
         return new ResponseEntity<>(memberList, HttpStatus.ACCEPTED);
     }
