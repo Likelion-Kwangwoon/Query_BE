@@ -1,5 +1,6 @@
 package com.query.dto;
 
+import com.query.entity.Member;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -11,6 +12,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class QuestionCreateRequest {
     private String body;
-    private Long ownerId;
-    private Long writerId;
+    private String ownerEmail;
+    private Member member;
 }

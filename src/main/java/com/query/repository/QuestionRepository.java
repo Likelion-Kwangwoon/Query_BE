@@ -10,5 +10,5 @@ import java.util.Optional;
 public interface QuestionRepository extends JpaRepository<Question, Long> {
     // 내가 작성한 질문 보기
     List<Question> findByOwnerAndWriter(Member owner, Member writer);
-    List<Question> findByOwer(Member owner);
+    List<Question> findByOwner(Member owner);
 }
