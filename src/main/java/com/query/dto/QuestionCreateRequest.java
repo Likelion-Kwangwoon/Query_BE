@@ -11,6 +11,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class QuestionCreateRequest {
     private String body;
-    private Long ownerId;
+    private String
     private Long writerId;
 }

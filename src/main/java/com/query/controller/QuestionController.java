@@ -27,7 +27,7 @@ public class QuestionController {
 //    }
 
     @PostMapping("/{email}")
-    public ResponseEntity<Void> addQuestion(@PathVariable String ownerEmail, @AuthenticationPrincipal Member member) {
+    public ResponseEntity<Void> addQuestion(@PathVariable String ownerEmail, @AuthenticationPrincipal Member writer) {
 
     }
 
