@@ -17,6 +17,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
+@CrossOrigin(origins = "*")
+@RequestMapping("question")
 public class QuestionController {
     @Autowired
     QuestionService questionService;
