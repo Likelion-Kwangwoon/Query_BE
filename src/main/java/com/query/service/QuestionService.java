@@ -7,9 +7,11 @@ import com.query.entity.Question;
 import com.query.repository.MemberRepository;
 import com.query.repository.QuestionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class QuestionService {
 
     @Autowired
